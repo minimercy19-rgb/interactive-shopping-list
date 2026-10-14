@@ -37,13 +37,38 @@ function displayItems() {
             li.classList.add("purchased");
         }
 
-        li.innerHTML = `
-            <input type="checkbox" ${item.purchased ? "checked" : ""} onclick="togglePurchased(${index})">
-            <span class="name">${item.name}</span>
-            <span class="price">Ksh ${Number(item.price).toFixed(2)}</span>
-            <button onclick="editItem(${index})">Edit</button>
-            <button onclick="deleteItem(${index})">Delete</button>
-        `;
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = item.purchased;
+        checkbox.addEventListener("click", function () {
+            togglePurchased(index);
+        });
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "name";
+        nameSpan.textContent = item.name;
+
+        const priceSpan = document.createElement("span");
+        priceSpan.className = "price";
+        nameSpan.textContent = "Ksh " + Number(item.price).toFixed(2);
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", function () {
+            editItem(index);
+        });
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", function () {
+            deleteItem(index);
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(nameSpan);
+        li.appendChild(priceSpan);
+        li.appendChild(editBtn);
+        li.appendChild(deleteBtn);
 
         listEl.appendChild(li);
     });
