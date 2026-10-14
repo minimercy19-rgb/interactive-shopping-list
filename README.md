@@ -31,4 +31,5 @@ Users can add items with prices, mark them as purchased, edit or delete items, a
 - Edit existing items
 - Display total cost of purchased items
 
-## Deployed Link:  
+## Deployed Link: 
+- https://lovely-starship-405487.netlify.app/
