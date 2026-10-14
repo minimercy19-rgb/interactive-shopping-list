@@ -1,11 +1,15 @@
- let shoppingList = [];
+ let shoppingList = JSON.parse(localStorage.getItem("shoppingList")) || [];
 
 const form = document.getElementById("add-form");
 const listEl = document.getElementById("shopping-list");
 const selectedTotalEl = document.getElementById("selected-total");
 const allTotalEl = document.getElementById("all-total");
 const clearBtn = document.getElementById("clear-list");
-
+ 
+function saveList() {
+    localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+}
+ 
 function showTotals() {
     let selected = 0;
     let all = 0;
@@ -22,7 +26,7 @@ function showTotals() {
     selectedTotalEl.textContent = "Ksh " + selected.toFixed(2);
     allTotalEl.textContent = "Ksh " + all.toFixed(2);
 }
-
+ 
 function displayItems() {
     listEl.innerHTML = "";
 
@@ -45,14 +49,14 @@ function displayItems() {
     });
 
     showTotals();
+    saveList(); 
 }
  
 function togglePurchased(index) {
     shoppingList[index].purchased = !shoppingList[index].purchased;
     displayItems();
 }
-
-// Edit an item
+ 
 function editItem(index) {
     const item = shoppingList[index];
 
@@ -68,7 +72,7 @@ function editItem(index) {
         displayItems();
     }
 }
-
+ 
 function deleteItem(index) {
     shoppingList.splice(index, 1);
     displayItems();
@@ -93,10 +97,12 @@ form.addEventListener("submit", function (e) {
     form.reset();
     displayItems();
 });
- 
+
 clearBtn.addEventListener("click", function () {
     if (confirm("Clear the entire list?")) {
         shoppingList = [];
         displayItems();
     }
 });
+
+displayItems();
