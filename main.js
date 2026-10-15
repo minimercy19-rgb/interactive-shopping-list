@@ -50,7 +50,7 @@ function displayItems() {
 
         const priceSpan = document.createElement("span");
         priceSpan.className = "price";
-        nameSpan.textContent = "Ksh " + Number(item.price).toFixed(2);
+        priceSpan.textContent = "Ksh " + Number(item.price).toFixed(2);
 
         const editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
